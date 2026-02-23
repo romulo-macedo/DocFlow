@@ -1,0 +1,14 @@
+{
+  "name": "docflow-pdf-manager",
+  "version": "1.0.0",
+  "description": "Professional PDF manipulation app — delete, reorder, and insert pages",
+  "private": true,
+  "scripts": {
+    "dev": "npx serve . -p 3000",
+    "build": "echo 'Static site — no build step required'",
+    "start": "npx serve . -p 3000"
+  },
+  "keywords": ["pdf", "pdf-editor", "pdf-manipulator"],
+  "author": "",
+  "license": "MIT"
+}

@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-  <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -48,7 +48,6 @@
       flex-direction: column;
     }
 
-    /* ─── TOPBAR ─── */
     header {
       background: var(--white);
       border-bottom: 1px solid var(--border);
@@ -90,10 +89,8 @@
       text-transform: uppercase;
     }
 
-    /* ─── MAIN LAYOUT ─── */
     main { flex: 1; display: flex; flex-direction: column; }
 
-    /* ─── UPLOAD ZONE ─── */
     #upload-zone {
       flex: 1;
       display: flex;
@@ -144,39 +141,19 @@
       transition: all var(--transition);
       white-space: nowrap;
     }
-    .btn-primary {
-      background: var(--accent);
-      color: var(--white);
-    }
+    .btn-primary { background: var(--accent); color: var(--white); }
     .btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); box-shadow: var(--shadow-md); }
-    .btn-secondary {
-      background: var(--white);
-      color: var(--ink);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-sm);
-    }
+    .btn-secondary { background: var(--white); color: var(--ink); border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
     .btn-secondary:hover { background: var(--surface); border-color: var(--surface-3); }
-    .btn-danger {
-      background: var(--danger-soft);
-      color: var(--danger);
-      border: 1px solid rgba(224,51,51,.15);
-    }
+    .btn-danger { background: var(--danger-soft); color: var(--danger); border: 1px solid rgba(224,51,51,.15); }
     .btn-danger:hover { background: var(--danger); color: #fff; }
-    .btn-success {
-      background: var(--success);
-      color: #fff;
-    }
+    .btn-success { background: var(--success); color: #fff; }
     .btn-success:hover { opacity: .9; transform: translateY(-1px); box-shadow: var(--shadow-md); }
     .btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
     .btn-sm { padding: 6px 12px; font-size: 13px; }
-    .btn-icon {
-      width: 32px; height: 32px; padding: 0;
-      display: flex; align-items: center; justify-content: center;
-      border-radius: var(--radius-sm);
-    }
+    .btn-icon { width: 32px; height: 32px; padding: 0; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-sm); }
     .btn:disabled { opacity: .4; cursor: not-allowed; pointer-events: none; }
 
-    /* ─── EDITOR LAYOUT ─── */
     #editor { display: none; flex: 1; flex-direction: column; overflow: hidden; }
     #editor.active { display: flex; }
 
@@ -189,60 +166,19 @@
       gap: 12px;
       flex-wrap: wrap;
     }
-    .toolbar-section {
-      display: flex; align-items: center; gap: 8px;
-    }
-    .toolbar-divider {
-      width: 1px; height: 28px;
-      background: var(--border);
-      margin: 0 4px;
-    }
-    .toolbar-label {
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: .5px;
-      color: #9ca3af;
-    }
-    .file-info {
-      margin-left: auto;
-      display: flex; align-items: center; gap: 16px;
-    }
-    .file-name {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--ink);
-      max-width: 240px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-    .page-count {
-      font-size: 13px;
-      color: #6b7280;
-      font-family: var(--mono);
-    }
+    .toolbar-section { display: flex; align-items: center; gap: 8px; }
+    .toolbar-divider { width: 1px; height: 28px; background: var(--border); margin: 0 4px; }
+    .toolbar-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .5px; color: #9ca3af; }
+    .file-info { margin-left: auto; display: flex; align-items: center; gap: 16px; }
+    .file-name { font-size: 13px; font-weight: 500; color: var(--ink); max-width: 240px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .page-count { font-size: 13px; color: #6b7280; font-family: var(--mono); }
 
-    /* ─── PAGES GRID ─── */
-    .editor-body {
-      flex: 1;
-      overflow-y: auto;
-      padding: 32px;
-      background: var(--surface);
-    }
-    .pages-header {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 20px;
-    }
+    .editor-body { flex: 1; overflow-y: auto; padding: 32px; background: var(--surface); }
+    .pages-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
     .pages-header h3 { font-size: 14px; font-weight: 600; color: var(--ink-3); letter-spacing: -.2px; }
     .hint { font-size: 12px; color: #9ca3af; }
-    #pages-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 16px;
-    }
+    #pages-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
 
-    /* ─── PAGE CARD ─── */
     .page-card {
       background: var(--white);
       border-radius: var(--radius);
@@ -266,11 +202,7 @@
       overflow: hidden;
       display: flex; align-items: center; justify-content: center;
     }
-    .page-preview canvas {
-      width: 100% !important;
-      height: 100% !important;
-      object-fit: contain;
-    }
+    .page-preview canvas { width: 100% !important; height: 100% !important; object-fit: contain; }
     .page-preview .loading-shimmer {
       position: absolute; inset: 0;
       background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
@@ -280,61 +212,32 @@
     @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
 
     .page-overlay {
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       background: rgba(26,86,219,.06);
       opacity: 0;
       transition: opacity var(--transition);
       display: flex; align-items: flex-start; justify-content: flex-end;
-      padding: 8px;
-      gap: 4px;
+      padding: 8px; gap: 4px;
     }
     .page-card:hover .page-overlay { opacity: 1; }
-    .page-overlay .btn-icon {
-      background: rgba(255,255,255,.95);
-      backdrop-filter: blur(4px);
-      border: 1px solid rgba(0,0,0,.08);
-      box-shadow: var(--shadow-sm);
-    }
+    .page-overlay .btn-icon { background: rgba(255,255,255,.95); backdrop-filter: blur(4px); border: 1px solid rgba(0,0,0,.08); box-shadow: var(--shadow-sm); }
     .page-overlay .btn-icon:hover { transform: scale(1.05); }
     .btn-delete-overlay:hover { background: var(--danger) !important; color: white !important; }
 
-    .page-footer {
-      padding: 10px 12px;
-      display: flex; align-items: center; justify-content: space-between;
-      border-top: 1px solid var(--border);
-    }
-    .page-num {
-      font-size: 12px;
-      font-weight: 600;
-      color: #6b7280;
-      font-family: var(--mono);
-    }
+    .page-footer { padding: 10px 12px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); }
+    .page-num { font-size: 12px; font-weight: 600; color: #6b7280; font-family: var(--mono); }
     .page-actions { display: flex; gap: 4px; }
 
-    /* ─── INSERT PLACEHOLDER ─── */
     .insert-placeholder {
       border: 2px dashed var(--surface-3);
       border-radius: var(--radius);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      cursor: pointer;
-      transition: all var(--transition);
-      padding: 32px 16px;
-      color: #9ca3af;
-      font-size: 13px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 8px; cursor: pointer; transition: all var(--transition);
+      padding: 32px 16px; color: #9ca3af; font-size: 13px;
     }
-    .insert-placeholder:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      background: var(--accent-soft);
-    }
+    .insert-placeholder:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
     .insert-placeholder svg { width: 24px; height: 24px; stroke: currentColor; fill: none; stroke-width: 2; }
 
-    /* ─── MODAL ─── */
     .modal-backdrop {
       position: fixed; inset: 0;
       background: rgba(13,17,23,.5);
@@ -348,8 +251,7 @@
     .modal {
       background: var(--white);
       border-radius: var(--radius-lg);
-      padding: 32px;
-      width: 480px;
+      padding: 32px; width: 480px;
       max-width: calc(100vw - 32px);
       box-shadow: var(--shadow-lg);
       transform: translateY(16px) scale(.98);
@@ -361,11 +263,8 @@
     .modal-drop {
       border: 2px dashed var(--surface-3);
       border-radius: var(--radius);
-      padding: 40px;
-      text-align: center;
-      cursor: pointer;
-      transition: all var(--transition);
-      margin-bottom: 20px;
+      padding: 40px; text-align: center; cursor: pointer;
+      transition: all var(--transition); margin-bottom: 20px;
     }
     .modal-drop:hover, .modal-drop.drag-over { border-color: var(--accent); background: var(--accent-soft); }
     .modal-drop svg { width: 32px; height: 32px; stroke: #9ca3af; fill: none; margin: 0 auto 10px; display: block; }
@@ -373,45 +272,21 @@
     .modal-drop strong { color: var(--accent); }
     .modal-actions { display: flex; justify-content: flex-end; gap: 8px; }
 
-    /* ─── TOAST ─── */
-    #toast-container {
-      position: fixed;
-      bottom: 24px; right: 24px;
-      z-index: 300;
-      display: flex; flex-direction: column; gap: 8px;
-    }
+    #toast-container { position: fixed; bottom: 24px; right: 24px; z-index: 300; display: flex; flex-direction: column; gap: 8px; }
     .toast {
-      background: var(--ink);
-      color: #fff;
-      padding: 12px 18px;
-      border-radius: var(--radius-sm);
-      font-size: 14px;
-      font-weight: 500;
-      box-shadow: var(--shadow-lg);
-      animation: slideUp .25s ease;
-      display: flex; align-items: center; gap: 8px;
+      background: var(--ink); color: #fff;
+      padding: 12px 18px; border-radius: var(--radius-sm);
+      font-size: 14px; font-weight: 500; box-shadow: var(--shadow-lg);
+      animation: slideUp .25s ease; display: flex; align-items: center; gap: 8px;
     }
     .toast.success { background: var(--success); }
     .toast.error { background: var(--danger); }
     @keyframes slideUp { from { transform: translateY(12px); opacity: 0; } }
     .toast svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; flex-shrink: 0; }
 
-    /* ─── PROGRESS ─── */
-    .progress-bar {
-      height: 3px;
-      background: var(--surface-2);
-      border-radius: 2px;
-      overflow: hidden;
-      margin-bottom: 24px;
-    }
-    .progress-fill {
-      height: 100%;
-      background: var(--accent);
-      border-radius: 2px;
-      transition: width .4s ease;
-    }
+    .progress-bar { height: 3px; background: var(--surface-2); border-radius: 2px; overflow: hidden; margin-bottom: 24px; }
+    .progress-fill { height: 100%; background: var(--accent); border-radius: 2px; transition: width .4s ease; }
 
-    /* ─── SELECTION BAR ─── */
     #selection-bar {
       position: fixed;
       bottom: 24px; left: 50%; transform: translateX(-50%);
@@ -425,13 +300,12 @@
       transition: all var(--transition);
       white-space: nowrap;
     }
-    #selection-bar.active { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+    #selection-bar.active { opacity: 1; visibility: visible; }
     #selection-bar span { font-size: 14px; font-weight: 500; color: rgba(255,255,255,.9); }
     #selection-bar .btn { font-size: 13px; }
 
     input[type=file] { display: none; }
 
-    /* ─── RESPONSIVE ─── */
     @media (max-width: 640px) {
       .upload-card { padding: 40px 24px; }
       .editor-body { padding: 16px; }
@@ -441,13 +315,12 @@
 </head>
 <body>
 
-<!-- HEADER -->
 <header>
   <a href="#" class="logo" onclick="resetApp(); return false;">
     <div class="logo-icon">
       <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
     </div>
-    DocFlow PDF
+    DocFlow
   </a>
   <div class="header-actions">
     <span class="badge">PDF Manager</span>
@@ -463,11 +336,19 @@
 </header>
 
 <main>
-  <!-- UPLOAD ZONE -->
   <div id="upload-zone">
-    <div class="upload-card" id="drop-zone" onclick="document.getElementById('file-input').click()" ondrop="handleFileDrop(event)" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)">
+    <div class="upload-card" id="drop-zone"
+      onclick="document.getElementById('file-input').click()"
+      ondrop="handleFileDrop(event)"
+      ondragover="handleDragOver(event)"
+      ondragleave="handleDragLeave(event)">
       <div class="upload-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="12" y1="18" x2="12" y2="12"/>
+          <line x1="9" y1="15" x2="15" y2="15"/>
+        </svg>
       </div>
       <h2>Abra seu PDF</h2>
       <p>Arraste e solte um arquivo PDF aqui, ou clique para selecionar do seu computador.</p>
@@ -475,11 +356,10 @@
         <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
         Selecionar arquivo
       </button>
-      <small>Suporte a PDF — máx. 50MB</small>
+      <small>Suporte a PDF — máx. 150MB</small>
     </div>
   </div>
 
-  <!-- EDITOR -->
   <div id="editor">
     <div class="toolbar">
       <div class="toolbar-section">
@@ -491,17 +371,15 @@
           <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h6"/></svg>
           Selec. Todas
         </button>
-        <button class="btn btn-secondary btn-sm" onclick="clearSelection()">
-          Limpar Seleção
-        </button>
+        <button class="btn btn-secondary btn-sm" onclick="clearSelection()">Limpar Seleção</button>
       </div>
       <div class="toolbar-divider"></div>
       <div class="toolbar-section">
-        <button class="btn btn-secondary btn-sm" id="btn-insert-before" onclick="openInsertModal('before')">
+        <button class="btn btn-secondary btn-sm" onclick="openInsertModal('before')">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
           Inserir no Início
         </button>
-        <button class="btn btn-secondary btn-sm" id="btn-insert-after" onclick="openInsertModal('after')">
+        <button class="btn btn-secondary btn-sm" onclick="openInsertModal('after')">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
           Inserir no Final
         </button>
@@ -511,18 +389,16 @@
         <span class="page-count" id="page-count-display"></span>
       </div>
     </div>
-
     <div class="editor-body">
       <div class="pages-header">
         <h3>Páginas do documento</h3>
-        <span class="hint">Arraste para reordenar • Clique para selecionar</span>
+        <span class="hint">Arraste para reordenar • Clique para selecionar • Ctrl+A para todas • Del para excluir</span>
       </div>
       <div id="pages-grid"></div>
     </div>
   </div>
 </main>
 
-<!-- SELECTION BAR -->
 <div id="selection-bar">
   <span id="selection-count">0 páginas selecionadas</span>
   <div class="toolbar-divider" style="background:rgba(255,255,255,.2)"></div>
@@ -533,12 +409,15 @@
   <button class="btn btn-sm btn-secondary" onclick="clearSelection()">Cancelar</button>
 </div>
 
-<!-- INSERT MODAL -->
 <div class="modal-backdrop" id="insert-modal">
   <div class="modal">
     <h3>Inserir páginas de outro PDF</h3>
     <p>Selecione um arquivo PDF para inserir suas páginas no documento atual.</p>
-    <div class="modal-drop" id="modal-drop" onclick="document.getElementById('insert-file-input').click()" ondrop="handleInsertDrop(event)" ondragover="e=>{e.preventDefault();this.classList.add('drag-over')}" ondragleave="e=>{this.classList.remove('drag-over')}">
+    <div class="modal-drop" id="modal-drop"
+      onclick="document.getElementById('insert-file-input').click()"
+      ondrop="handleInsertDrop(event)"
+      ondragover="event.preventDefault(); this.classList.add('drag-over')"
+      ondragleave="this.classList.remove('drag-over')">
       <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
       <span>Arraste um PDF ou <strong>clique para selecionar</strong></span>
     </div>
@@ -561,15 +440,13 @@
   pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
   // ── STATE ──
-  let pdfDoc = null;         // pdf-lib PDFDocument
-  let pdfJsDoc = null;       // pdf.js doc (for rendering)
-  let pages = [];            // [{originalIndex, pdfPage, canvas}]
+  let pages = [];
   let selectedPages = new Set();
   let dragSrcIdx = null;
   let insertPosition = 'after';
 
-  // ── UTILS ──
-  function showToast(msg, type='info') {
+  // ── TOAST ──
+  function showToast(msg, type = 'info') {
     const icons = {
       success: '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>',
       error: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>',
@@ -577,19 +454,19 @@
     };
     const t = document.createElement('div');
     t.className = `toast ${type}`;
-    t.innerHTML = `${icons[type]||icons.info}${msg}`;
+    t.innerHTML = `${icons[type] || icons.info}${msg}`;
     document.getElementById('toast-container').appendChild(t);
     setTimeout(() => t.remove(), 3400);
   }
 
-  // ── DRAG-DROP FILE ──
+  // ── DRAG-DROP ──
   function handleDragOver(e) { e.preventDefault(); e.currentTarget.classList.add('drag-over'); }
   function handleDragLeave(e) { e.currentTarget.classList.remove('drag-over'); }
   function handleFileDrop(e) {
     e.preventDefault();
     e.currentTarget.classList.remove('drag-over');
     const file = e.dataTransfer.files[0];
-    if (file?.type === 'application/pdf') loadPDF(file);
+    if (file && file.name.toLowerCase().endsWith('.pdf')) loadPDF(file);
     else showToast('Por favor, envie um arquivo .pdf', 'error');
   }
   function handleFileSelect(e) {
@@ -600,21 +477,21 @@
 
   // ── LOAD PDF ──
   async function loadPDF(file) {
-    if (file.size > 50 * 1024 * 1024) { showToast('Arquivo muito grande (máx 50MB)', 'error'); return; }
+    if (file.size > 150 * 1024 * 1024) { showToast('Arquivo muito grande (máx 150MB)', 'error'); return; }
     showToast('Carregando PDF…', 'info');
     try {
       const arrayBuffer = await file.arrayBuffer();
-      // Load with pdf-lib for editing
-      pdfDoc = await PDFLib.PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
-      // Load with pdf.js for rendering
-      pdfJsDoc = await pdfjsLib.getDocument({ data: new Uint8Array(arrayBuffer) }).promise;
+      const pdfLibDoc = await PDFLib.PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
+      const pdfJsDoc  = await pdfjsLib.getDocument({ data: new Uint8Array(arrayBuffer) }).promise;
+      const numPages  = pdfLibDoc.getPageCount();
 
-      // Build pages array
-      pages = [];
-      const numPages = pdfDoc.getPageCount();
-      for (let i = 0; i < numPages; i++) {
-        pages.push({ id: `p-${Date.now()}-${i}`, sourceDoc: pdfDoc, sourceIdx: i, pdfJsDoc, pdfJsPageIdx: i });
-      }
+      pages = Array.from({ length: numPages }, (_, i) => ({
+        id: `p-${Date.now()}-${i}`,
+        sourceDoc: pdfLibDoc,
+        sourceIdx: i,
+        pdfJsDoc,
+        pdfJsPageIdx: i
+      }));
 
       document.getElementById('upload-zone').style.display = 'none';
       document.getElementById('editor').classList.add('active');
@@ -624,9 +501,9 @@
       updatePageCount();
       await renderGrid();
       showToast('PDF carregado com sucesso!', 'success');
-    } catch(err) {
+    } catch (err) {
       console.error(err);
-      showToast('Erro ao carregar o PDF', 'error');
+      showToast('Erro ao carregar o PDF: ' + err.message, 'error');
     }
   }
 
@@ -636,71 +513,58 @@
     grid.innerHTML = '';
     selectedPages.clear();
     updateSelectionBar();
-
-    for (let i = 0; i < pages.length; i++) {
-      const card = createPageCard(i);
-      grid.appendChild(card);
-    }
-    // Insert placeholder at end
-    const placeholder = createInsertPlaceholder(pages.length);
-    grid.appendChild(placeholder);
-
-    // Render thumbnails
-    for (let i = 0; i < pages.length; i++) {
-      renderThumbnail(i);
-    }
+    for (let i = 0; i < pages.length; i++) grid.appendChild(createPageCard(i));
+    grid.appendChild(createInsertPlaceholder(pages.length));
+    for (let i = 0; i < pages.length; i++) renderThumbnail(i);
   }
 
   // ── CREATE CARD ──
   function createPageCard(idx) {
-    const page = pages[idx];
     const card = document.createElement('div');
     card.className = 'page-card';
     card.dataset.idx = idx;
     card.draggable = true;
-
     card.innerHTML = `
       <div class="page-preview">
         <div class="loading-shimmer"></div>
         <canvas id="canvas-${idx}"></canvas>
         <div class="page-overlay">
           <button class="btn btn-icon btn-delete-overlay" title="Excluir página" onclick="deletePage(${idx}, event)">
-            <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg>
+            <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none" stroke-width="2">
+              <polyline points="3 6 5 6 21 6"/>
+              <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a1 1 0 011-1h4a1 1 0 011 1v2"/>
+            </svg>
           </button>
         </div>
       </div>
       <div class="page-footer">
         <span class="page-num">#${idx + 1}</span>
         <div class="page-actions">
-          <button class="btn btn-icon btn-secondary" title="Mover para cima" onclick="movePage(${idx}, -1, event)" ${idx===0?'disabled':''} style="width:26px;height:26px;">
+          <button class="btn btn-icon btn-secondary" title="Mover para cima" onclick="movePage(${idx}, -1, event)" ${idx === 0 ? 'disabled' : ''} style="width:26px;height:26px;">
             <svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" fill="none" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
           </button>
-          <button class="btn btn-icon btn-secondary" title="Mover para baixo" onclick="movePage(${idx}, 1, event)" ${idx===pages.length-1?'disabled':''} style="width:26px;height:26px;">
+          <button class="btn btn-icon btn-secondary" title="Mover para baixo" onclick="movePage(${idx}, 1, event)" ${idx === pages.length - 1 ? 'disabled' : ''} style="width:26px;height:26px;">
             <svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" fill="none" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
         </div>
       </div>`;
 
-    // Select on click
-    card.addEventListener('click', (e) => {
-      if (e.target.closest('.btn')) return;
-      toggleSelect(idx);
-    });
-
-    // Drag events
-    card.addEventListener('dragstart', (e) => { dragSrcIdx = idx; card.classList.add('dragging'); e.dataTransfer.effectAllowed='move'; });
-    card.addEventListener('dragend', () => { card.classList.remove('dragging'); document.querySelectorAll('.drag-target').forEach(el=>el.classList.remove('drag-target')); });
+    card.addEventListener('click', (e) => { if (e.target.closest('.btn')) return; toggleSelect(idx); });
+    card.addEventListener('dragstart', (e) => { dragSrcIdx = idx; card.classList.add('dragging'); e.dataTransfer.effectAllowed = 'move'; });
+    card.addEventListener('dragend', () => { card.classList.remove('dragging'); document.querySelectorAll('.drag-target').forEach(el => el.classList.remove('drag-target')); });
     card.addEventListener('dragover', (e) => { e.preventDefault(); card.classList.add('drag-target'); });
     card.addEventListener('dragleave', () => card.classList.remove('drag-target'));
-    card.addEventListener('drop', (e) => { e.preventDefault(); card.classList.remove('drag-target'); if (dragSrcIdx !== null && dragSrcIdx !== idx) { movePagesToIndex(dragSrcIdx, idx); } dragSrcIdx = null; });
-
+    card.addEventListener('drop', (e) => {
+      e.preventDefault(); card.classList.remove('drag-target');
+      if (dragSrcIdx !== null && dragSrcIdx !== idx) movePagesToIndex(dragSrcIdx, idx);
+      dragSrcIdx = null;
+    });
     return card;
   }
 
   function createInsertPlaceholder(atIdx) {
     const ph = document.createElement('div');
     ph.className = 'insert-placeholder';
-    ph.title = 'Inserir PDF aqui';
     ph.innerHTML = `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg><span>Inserir PDF</span>`;
     ph.onclick = () => { insertPosition = atIdx; openInsertModal('position'); };
     return ph;
@@ -717,22 +581,16 @@
       canvas.width = viewport.width;
       canvas.height = viewport.height;
       await pdfJsPage.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
-      // Remove shimmer
       const shimmer = canvas.closest('.page-preview')?.querySelector('.loading-shimmer');
       if (shimmer) shimmer.style.display = 'none';
-    } catch (e) { console.warn('Render error', e); }
+    } catch (e) { console.warn('Thumbnail error', e); }
   }
 
   // ── PAGE OPERATIONS ──
   function toggleSelect(idx) {
     const card = document.querySelector(`.page-card[data-idx="${idx}"]`);
-    if (selectedPages.has(idx)) {
-      selectedPages.delete(idx);
-      card?.classList.remove('selected');
-    } else {
-      selectedPages.add(idx);
-      card?.classList.add('selected');
-    }
+    if (selectedPages.has(idx)) { selectedPages.delete(idx); card?.classList.remove('selected'); }
+    else { selectedPages.add(idx); card?.classList.add('selected'); }
     updateSelectionBar();
   }
 
@@ -750,7 +608,7 @@
   function updateSelectionBar() {
     const bar = document.getElementById('selection-bar');
     const count = selectedPages.size;
-    document.getElementById('selection-count').textContent = `${count} página${count!==1?'s':''} selecionada${count!==1?'s':''}`;
+    document.getElementById('selection-count').textContent = `${count} página${count !== 1 ? 's' : ''} selecionada${count !== 1 ? 's' : ''}`;
     bar.classList.toggle('active', count > 0);
   }
 
@@ -763,13 +621,12 @@
   }
 
   function deleteSelected() {
-    if (selectedPages.size === 0) return;
+    if (!selectedPages.size) return;
     if (selectedPages.size >= pages.length) { showToast('Não é possível excluir todas as páginas', 'error'); return; }
-    const toDelete = [...selectedPages].sort((a,b) => b-a);
-    toDelete.forEach(i => pages.splice(i, 1));
+    [...selectedPages].sort((a, b) => b - a).forEach(i => pages.splice(i, 1));
     updatePageCount();
     renderGrid();
-    showToast(`${toDelete.length} página${toDelete.length>1?'s':''} excluída${toDelete.length>1?'s':''}`, 'success');
+    showToast(`${selectedPages.size || 'Páginas'} excluída(s)`, 'success');
   }
 
   function movePage(idx, dir, e) {
@@ -782,8 +639,7 @@
 
   function movePagesToIndex(fromIdx, toIdx) {
     const page = pages.splice(fromIdx, 1)[0];
-    const targetIdx = fromIdx < toIdx ? toIdx - 1 : toIdx;
-    pages.splice(targetIdx, 0, page);
+    pages.splice(fromIdx < toIdx ? toIdx - 1 : toIdx, 0, page);
     renderGrid();
   }
 
@@ -792,60 +648,47 @@
   }
 
   // ── INSERT MODAL ──
-  function openInsertModal(position) {
-    insertPosition = position;
-    document.getElementById('insert-modal').classList.add('active');
-  }
+  function openInsertModal(pos) { insertPosition = pos; document.getElementById('insert-modal').classList.add('active'); }
   function closeInsertModal() { document.getElementById('insert-modal').classList.remove('active'); }
 
   function handleInsertDrop(e) {
     e.preventDefault();
     document.getElementById('modal-drop').classList.remove('drag-over');
     const file = e.dataTransfer.files[0];
-    if (file?.type === 'application/pdf') processInsertFile(file);
+    if (file && file.name.toLowerCase().endsWith('.pdf')) processInsertFile(file);
     else showToast('Por favor, envie um arquivo .pdf', 'error');
   }
-  function handleInsertFileSelect(e) {
-    const file = e.target.files[0];
-    if (file) processInsertFile(file);
-    e.target.value = '';
-  }
+  function handleInsertFileSelect(e) { const f = e.target.files[0]; if (f) processInsertFile(f); e.target.value = ''; }
 
   async function processInsertFile(file) {
     const bar = document.getElementById('insert-progress-bar');
     const fill = document.getElementById('insert-progress-fill');
-    bar.style.display = '';
-    fill.style.width = '0%';
+    bar.style.display = ''; fill.style.width = '0%';
     try {
       const ab = await file.arrayBuffer();
       fill.style.width = '40%';
-      const newPdfDoc = await PDFLib.PDFDocument.load(ab, { ignoreEncryption: true });
-      fill.style.width = '60%';
+      const newPdfLibDoc = await PDFLib.PDFDocument.load(ab, { ignoreEncryption: true });
+      fill.style.width = '65%';
       const newPdfJsDoc = await pdfjsLib.getDocument({ data: new Uint8Array(ab) }).promise;
       fill.style.width = '90%';
-      const numPages = newPdfDoc.getPageCount();
-      const newPages = Array.from({length: numPages}, (_, i) => ({ id:`ins-${Date.now()}-${i}`, sourceDoc: newPdfDoc, sourceIdx: i, pdfJsDoc: newPdfJsDoc, pdfJsPageIdx: i }));
-
-      let insertAt;
-      if (insertPosition === 'before') insertAt = 0;
-      else if (insertPosition === 'after') insertAt = pages.length;
-      else insertAt = typeof insertPosition === 'number' ? insertPosition : pages.length;
-
+      const numPages = newPdfLibDoc.getPageCount();
+      const newPages = Array.from({ length: numPages }, (_, i) => ({ id: `ins-${Date.now()}-${i}`, sourceDoc: newPdfLibDoc, sourceIdx: i, pdfJsDoc: newPdfJsDoc, pdfJsPageIdx: i }));
+      const insertAt = insertPosition === 'before' ? 0 : insertPosition === 'after' ? pages.length : (typeof insertPosition === 'number' ? insertPosition : pages.length);
       pages.splice(insertAt, 0, ...newPages);
       fill.style.width = '100%';
       closeInsertModal();
       updatePageCount();
       await renderGrid();
-      showToast(`${numPages} página${numPages>1?'s':''} inserida${numPages>1?'s':''}!`, 'success');
-    } catch(err) {
+      showToast(`${numPages} página${numPages > 1 ? 's' : ''} inserida${numPages > 1 ? 's' : ''}!`, 'success');
+    } catch (err) {
       console.error(err);
-      showToast('Erro ao processar o PDF', 'error');
+      showToast('Erro ao processar o PDF: ' + err.message, 'error');
     } finally {
-      setTimeout(() => { bar.style.display = 'none'; fill.style.width = '0%'; }, 500);
+      setTimeout(() => { bar.style.display = 'none'; fill.style.width = '0%'; }, 600);
     }
   }
 
-  // ── DOWNLOAD / EXPORT ──
+  // ── EXPORT ──
   async function downloadPDF() {
     if (!pages.length) { showToast('Nenhuma página para exportar', 'error'); return; }
     const btn = document.getElementById('btn-download');
@@ -853,37 +696,26 @@
     btn.innerHTML = `<svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Exportando…`;
     showToast('Gerando PDF…', 'info');
     try {
-      // Create new document
       const outputDoc = await PDFLib.PDFDocument.create();
-      // Group pages by source doc for batch copy
-      // We need to copy each page from its source
       const sourceGroups = new Map();
       pages.forEach((p, i) => {
-        const key = p.sourceDoc;
-        if (!sourceGroups.has(key)) sourceGroups.set(key, []);
-        sourceGroups.get(key).push({ page: p, outputIdx: i });
+        if (!sourceGroups.has(p.sourceDoc)) sourceGroups.set(p.sourceDoc, []);
+        sourceGroups.get(p.sourceDoc).push({ page: p, outputIdx: i });
       });
-
-      // Copy all pages
       const outputPages = new Array(pages.length);
       for (const [srcDoc, items] of sourceGroups) {
-        const indices = items.map(item => item.page.sourceIdx);
-        const copied = await outputDoc.copyPages(srcDoc, indices);
+        const copied = await outputDoc.copyPages(srcDoc, items.map(it => it.page.sourceIdx));
         items.forEach((item, j) => { outputPages[item.outputIdx] = copied[j]; });
       }
       outputPages.forEach(p => outputDoc.addPage(p));
-
       const bytes = await outputDoc.save();
-      const blob = new Blob([bytes], { type: 'application/pdf' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url; a.download = 'docflow-output.pdf';
-      a.click();
+      const url = URL.createObjectURL(new Blob([bytes], { type: 'application/pdf' }));
+      Object.assign(document.createElement('a'), { href: url, download: 'docflow-output.pdf' }).click();
       URL.revokeObjectURL(url);
       showToast('PDF exportado com sucesso!', 'success');
-    } catch(err) {
+    } catch (err) {
       console.error(err);
-      showToast('Erro ao exportar PDF', 'error');
+      showToast('Erro ao exportar: ' + err.message, 'error');
     } finally {
       btn.disabled = false;
       btn.innerHTML = `<svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Exportar PDF`;
@@ -892,7 +724,7 @@
 
   // ── RESET ──
   function resetApp() {
-    pdfDoc = null; pdfJsDoc = null; pages = []; selectedPages.clear();
+    pages = []; selectedPages.clear();
     document.getElementById('editor').classList.remove('active');
     document.getElementById('upload-zone').style.display = '';
     document.getElementById('btn-new-file').style.display = 'none';
@@ -901,18 +733,13 @@
     updateSelectionBar();
   }
 
-  // ── KEYBOARD SHORTCUTS ──
+  // ── KEYBOARD ──
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') clearSelection();
-    if ((e.key === 'Delete' || e.key === 'Backspace') && selectedPages.size > 0 && document.activeElement === document.body) {
-      e.preventDefault(); deleteSelected();
-    }
-    if (e.key === 'a' && (e.ctrlKey || e.metaKey) && pages.length > 0) {
-      e.preventDefault(); selectAll();
-    }
+    if ((e.key === 'Delete' || e.key === 'Backspace') && selectedPages.size > 0 && document.activeElement === document.body) { e.preventDefault(); deleteSelected(); }
+    if (e.key === 'a' && (e.ctrlKey || e.metaKey) && pages.length > 0) { e.preventDefault(); selectAll(); }
   });
 
-  // Close modal on backdrop click
   document.getElementById('insert-modal').addEventListener('click', (e) => { if (e.target === e.currentTarget) closeInsertModal(); });
 </script>
 </body>
